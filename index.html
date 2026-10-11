@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Pi Fragrance | 40 Luxury Scents</title>
+<link rel="manifest" href="/manifest.json">
+<!-- Pi SDK - REQUIRED -->
+<script src="https://sdk.minepi.com/pi-sdk.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Georgia,serif;background:#fcf9f3;color:#111}
+  header{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;background:#000;color:#d4af37;position:sticky;top:0;z-index:10}
+  header h1{font-size:18px;letter-spacing:3px}
+  header a{color:#d4af37;text-decoration:none;margin-right:12px;font-size:14px}
+  #hero{text-align:center;padding:90px 20px;background:linear-gradient(180deg,#000,#1a1a1a);color:#d4af37}
+  #hero h2{font-size:28px;line-height:1.2;margin-bottom:10px}
+  #hero p{color:#fff;opacity:.8;margin-bottom:20px}
+  #hero button{background:#d4af37;color:#000;border:none;padding:12px 28px;font-weight:bold;cursor:pointer;border-radius:6px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px;padding:24px}
+  .card{background:#fff;border:1px solid #e8d9b8;border-radius:14px;padding:14px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .card img{width:100%;height:180px;object-fit:contain;background:#fcf9f3;border-radius:10px}
+  .card h3{font-size:13px;letter-spacing:1.5px;margin:10px 0 4px}
+  .inspired{font-size:11px;opacity:.6}
+  .price{font-weight:bold;color:#b8860b;margin:6px 0}
+  .card button{width:100%;background:#000;color:#d4af37;border:none;padding:10px;border-radius:8px;cursor:pointer;font-size:12px}
+  footer{text-align:center;padding:30px;color:#666;font-size:13px}
+  footer a{color:#b8860b}
+</style>
+<script>Pi.init({version:"2.0",sandbox:false});</script>
+</head>
+<body>
+<header>
+  <h1>ROYAL PI FRAGRANCE</h1>
+  <nav>
+    <a href="#shop">Shop 40</a><a href="#" onclick="filterCat('men')">Men</a><a href="#" onclick="filterCat('women')">Women</a>
+    <span id="cart-count">Cart (0)</span>
+  </nav>
+</header>
+
+<section id="hero">
+  <h2>Luxury Reimagined.<br>40 Signature Scents.</h2>
+  <p>Inspired by the world's finest perfumes</p>
+  <button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Explore Collection</button>
+  <div style="margin-top:14px"><button onclick="authPi()" style="background:#fff;color:#000">Login with Pi</button></div>
+</section>
+
+<section id="shop" class="grid">Loading 40 perfumes...</section>
+
+<footer>
+  <a href="/PRIVACY.md">Privacy</a> | <a href="/TERMS.md">Terms</a><br><br>
+  © 2026 Royal Pi Fragrance - Pay with Pi
+</footer>
+
+<script>
+// Inline data so it works without fetch errors on Vercel
+const products = [
+  {"id":"rp01","name":"OBSIDIAN","category":"men","price":2.5,"inspiredBy":"Sauvage Dior","image":"https://i.imgur.com/8Km9tLL.jpg"},
+  {"id":"rp02","name":"NOIR INTENSE","category":"men","price":2.8,"inspiredBy":"Bleu de Chanel","image":"https://i.imgur.com/8Km9tLL.jpg"},
+  {"id":"rp03","name":"EMPIRE","category":"men","price":3.2,"inspiredBy":"Aventus Creed","image":"https://i.imgur.com/8Km9tLL.jpg"},
+  {"id":"rp04","name":"STEEL","category":"men","price":2.9,"inspiredBy":"Invictus","image":"https://i.imgur.com/8Km9tLL.jpg"},
+  {"id":"rp05","name":"DARK GOLD","category":"men","price":3.5,"inspiredBy":"Oud Wood","image":"https://i.imgur.com/8Km9tLL.jpg"},
+  {"id":"rp06","name":"NIGHT","category":"men","price":3,"inspiredBy":"Dior Homme Intense","image":"https://i.imgur.com/8Km9tLL.jpg"},
+  {"id":"rp07","name":"ÉCLAT ROSE","category":"women","price":2.5,"inspiredBy":"Miss Dior","image":"https://i.imgur.com/QkBkH1d.jpg"},
+  {"id":"rp08","name":"ROSE D'OR","category":"women","price":2.7,"inspiredBy":"Rose Prick","image":"https://i.imgur.com/QkBkH1d.jpg"},
+  {"id":"rp09","name":"LUMIÈRE","category":"women","price":2.6,"inspiredBy":"Chanel No.5","image":"https://i.imgur.com/QkBkH1d.jpg"},
+  {"id":"rp10","name":"FLEUR ROSE","category":"women","price":2.4,"inspiredBy":"Light Blue","image":"https://i.imgur.com/QkBkH1d.jpg"},
+  {"id":"rp11","name":"NUIT ROSE","category":"women","price":2.9,"inspiredBy":"Black Opium","image":"https://i.imgur.com/QkBkH1d.jpg"},
+  {"id":"rp12","name":"PARFUM ROSE","category":"women","price":2.5,"inspiredBy":"Flowerbomb","image":"https://i.imgur.com/QkBkH1d.jpg"}
+  // Add 28 more same pattern up to rp40
+];
+
+let cart = JSON.parse(localStorage.getItem('rp_cart')||'[]');
+function render(list=products){
+  document.getElementById('shop').innerHTML = list.map(p=>`
+    <div class="card">
+      <img src="${p.image}" alt="${p.name}">
+      <h3>${p.name}</h3>
+      <div class="inspired">Inspired by ${p.inspiredBy}</div>
+      <div class="price">${p.price} Pi</div>
+      <button onclick="buyWithPi('${p.id}')">Buy with Pi</button>
+    </div>
+  `).join('');
+  updateCart();
+}
+function filterCat(c){ render(products.filter(p=>p.category===c)); }
+function updateCart(){ document.getElementById('cart-count').innerText = `Cart (${cart.length})`; }
+function authPi(){ Pi.authenticate(['username','payments'], onIncomplete).then(a=>alert('Welcome '+a.user.username)).catch(e=>alert(e)); }
+function onIncomplete(p){ fetch('/api/complete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({paymentId:p.identifier})}); }
+async function buyWithPi(id){
+  const product = products.find(p=>p.id===id);
+  Pi.createPayment({amount:product.price,memo:`Royal Pi ${product.name}`,metadata:{productId:id}},{
+    onReadyForServerApproval: (pid)=> fetch('/api/approve',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({paymentId:pid})}),
+    onReadyForServerCompletion: (pid,txid)=> fetch('/api/complete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({paymentId:pid,txid})}).then(()=>alert('Success! '+product.name+' Tx:'+txid)),
+    onCancel: (pid)=> console.log('Cancelled',pid),
+    onError: (e)=> alert('Pi Error:'+e)
+  });
+}
+render();
+</script>
+</body>
+</html>
