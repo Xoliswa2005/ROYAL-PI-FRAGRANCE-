@@ -1,0 +1,35 @@
+{
+  "app": {
+    "name": "Royal Pi Fragrance",
+    "id": "royal-pi-fragrance",
+    "description": "40 Luxury Signature Scents - Premium perfume house paying with Pi. Men's, Women's & Unisex collections inspired by world-class fragrances.",
+    "version": "1.0.0",
+    "network": "mainnet",
+    "category": "shopping",
+    "tags": ["fragrance", "perfume", "luxury", "shopping", "lifestyle", "pi-payments"],
+    "homepage": "https://royal-pi-fragrance.vercel.app",
+    "support": {
+      "email": "support@royalpifragrance.com",
+      "url": "https://royal-pi-fragrance.vercel.app/support"
+    },
+    "legal": {
+      "privacy_policy_url": "/PRIVACY.md",
+      "terms_of_service_url": "/TERMS.md"
+    },
+    "permissions": {
+      "auth": ["username", "payments", "wallet_address"],
+      "payments": true
+    },
+    "payments": {
+      "enabled": true,
+      "currency": "PI",
+      "test_mode": false,
+      "completion_url": "/api/complete",
+      "approval_url": "/api/approve"
+    },
+    "developer": {
+      "name": "Royal Pi",
+      "wallet": "G_YOUR_PI_WALLET_PUBLIC_KEY_HERE_REPLACE_THIS"
+    }
+  }
+}
