@@ -1,0 +1,123 @@
+{
+  "name": "Royal Pi Fragrance",
+  "short_name": "Royal Pi",
+  "description": "40 Luxury Signature Scents - Men's, Women's & Unisex. Pay with Pi. Premium fragrance house.",
+  "start_url": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "browser"],
+  "orientation": "any",
+  "background_color": "#000000",
+  "theme_color": "#d4af37",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["shopping", "lifestyle", "luxury"],
+  "screenshots": [
+    {
+      "src": "/images/screenshot-1.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Royal Pi 40 Collection Storefront"
+    },
+    {
+      "src": "/images/screenshot-2.jpg",
+      "sizes": "720x1280",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Buy with Pi"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/images/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Shop 40 Scents",
+      "short_name": "Shop",
+      "description": "Browse full Royal Pi collection",
+      "url": "/#shop",
+      "icons": [{ "src": "/images/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Men's Collection",
+      "short_name": "Men",
+      "description": "Men's Dark Collection",
+      "url": "/#men",
+      "icons": [{ "src": "/images/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Women's Rose",
+      "short_name": "Women",
+      "description": "Women's Rose Luxury",
+      "url": "/#women",
+      "icons": [{ "src": "/images/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ],
+  "pi_app": {
+    "id": "royal-pi-fragrance",
+    "version": "1.0.0",
+    "network": "mainnet",
+    "sdk_version": "2.0",
+    "payments": {
+      "enabled": true
+    },
+    "permissions": ["username", "payments", "wallet_address"]
+  },
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  },
+  "handle_links": "preferred",
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}
